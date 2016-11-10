@@ -1,6 +1,7 @@
 package com.example.sample.antriksh.retrofitrxandroidexample.activity;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.sample.antriksh.retrofitrxandroidexample.R;
 import com.example.sample.antriksh.retrofitrxandroidexample.api.Pokemon;
+import com.example.sample.antriksh.retrofitrxandroidexample.databinding.ActivityPokemonDetailBinding;
 
 public class PokemonDetail extends AppCompatActivity {
 
@@ -29,30 +31,15 @@ public class PokemonDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pokemon_detail);
-        Intent it= getIntent();
-        Pokemon pokemon = (Pokemon) it.getSerializableExtra("pokemon");
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ActivityPokemonDetailBinding mBinding;
+        mBinding = DataBindingUtil.setContentView(this,R.layout.activity_pokemon_detail);
+
+
+        Pokemon pokemon = (Pokemon) getIntent().getSerializableExtra("pokemon");
+        Toolbar toolbar = mBinding.toolbar;
         toolbar.setTitle(pokemon.getName());
         setSupportActionBar(toolbar);
-
-        name = (TextView) findViewById(R.id.textName);
-        basicAtk = (TextView) findViewById(R.id.textBasicMove);
-        chargeAtk = (TextView) findViewById(R.id.textChargeMove);
-        chargeDamage = (TextView) findViewById(R.id.textChargeDamage);
-        damage = (TextView) findViewById(R.id.textBasciDamage);
-        gynDamage = (TextView) findViewById(R.id.textGynDamage);
-        tank = (TextView) findViewById(R.id.textGynTank);
-
-
-
-        name.setText(pokemon.getName());
-        basicAtk.setText(pokemon.getBasicAtk());
-        chargeAtk.setText(pokemon.getChargeAtk());
-        damage.setText(pokemon.getDamage());
-        chargeDamage.setText(pokemon.getChargeDamage());
-        gynDamage.setText(pokemon.getGynDamage());
-        tank.setText(pokemon.getTank());
+        mBinding.detail.setPokemon(pokemon);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="pokemon"
+            type="com.example.sample.antriksh.retrofitrxandroidexample.api.Pokemon"/>
+    </data>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -42,7 +47,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="@{pokemon.basicAtk}"
             android:id="@+id/textBasicMove"
             android:layout_below="@+id/textMove"
             android:layout_alignLeft="@+id/textMove"
@@ -74,7 +79,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="@{pokemon.damage}"
             android:id="@+id/textBasciDamage"
             android:layout_alignTop="@+id/textBasicMove"
             android:layout_alignLeft="@+id/textDamage"
@@ -83,7 +88,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="@{pokemon.gynDamage}"
             android:id="@+id/textGynDamage"
             android:layout_alignTop="@+id/textBasciDamage"
             android:layout_alignLeft="@+id/textGyn"
@@ -92,7 +97,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="@{pokemon.chargeAtk}"
             android:id="@+id/textChargeMove"
             android:layout_below="@+id/textBasicMove"
             android:layout_alignLeft="@+id/textBasicMove"
@@ -102,7 +107,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="@{pokemon.chargeDamage}"
             android:id="@+id/textChargeDamage"
             android:layout_alignTop="@+id/textChargeMove"
             android:layout_alignLeft="@+id/textBasciDamage"
@@ -111,7 +116,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="@{pokemon.tank}"
             android:id="@+id/textGynTank"
             android:layout_alignTop="@+id/textChargeDamage"
             android:layout_alignLeft="@+id/textGynDamage"
@@ -120,3 +125,4 @@
     </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>
+</layout>

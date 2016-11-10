@@ -19,6 +19,7 @@
         android:elevation="90dp"
         card_view:cardBackgroundColor="@android:color/white"
         android:clickable="true"
+
         android:foreground="?android:attr/selectableItemBackground"
         card_view:theme="@style/Base.Animation.AppCompat.DropDownUp"
         card_view:cardCornerRadius="4dp"
@@ -90,7 +91,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text="@{pokemon.rankOff}"
                 android:id="@+id/textRankOff"
                 android:layout_below="@+id/continent"
                 android:layout_toRightOf="@+id/country"
@@ -101,7 +102,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text="@{pokemon.rankDef}"
                 android:id="@+id/textRankDef"
                 android:paddingTop="4dp"
                 android:paddingLeft="5dp"

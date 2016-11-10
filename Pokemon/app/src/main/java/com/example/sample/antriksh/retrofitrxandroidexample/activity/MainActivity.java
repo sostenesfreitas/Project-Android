@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         //recList = (RecyclerView) findViewById(R.id.cardList);
 
-      /**  final Snackbar snackbar = Snackbar
+      final Snackbar snackbar = Snackbar
                 .make(mBinding.coordinatorLayout,
                         getString(R.string.server_call), Snackbar.LENGTH_INDEFINITE)
                 .setAction("OK", new View.OnClickListener() {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     }
                 });
 
-        snackbar.show();**/
+        snackbar.show();
     }
 
 
@@ -80,17 +80,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     Observer<List<Pokemon>> myObserver = new Observer<List<Pokemon>>() {
-
         @Override
         public void onCompleted() {
             subscription.unsubscribe();
         }
 
         @Override
-        public void onError(Throwable e) {
-            // Called when the observable encounters an error
-            Log.d(TAG, ">>>> onError gets called : " + e.getMessage());
-        }
+        public void onError(Throwable e) {Log.d(TAG, ">>>> onError gets called : " + e.getMessage());}
 
         @Override
         public void onNext(List<Pokemon> pokemons) {

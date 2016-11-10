@@ -24,9 +24,10 @@ import java.util.List;
 
 public class PokemonAdapter extends
         RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder> {
-        CardviewLayoutBinding binding;
+
+    CardviewLayoutBinding CardBinding;
     private List<Pokemon> placesList;
-    Pokemon ci;
+    Pokemon pokemon;
     private Context mContext;
 
     public PokemonAdapter(List<Pokemon> placesList, Context context) {
@@ -46,45 +47,33 @@ public class PokemonAdapter extends
 
     @Override
     public PokemonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        binding = DataBindingUtil.inflate(LayoutInflater.
+        CardBinding = DataBindingUtil.inflate(LayoutInflater.
                 from(viewGroup.getContext()),
-               R.layout.cardview_layout, viewGroup, false);
-        return new PokemonViewHolder(binding.getRoot());
+                R.layout.cardview_layout, viewGroup, false);
+        return new PokemonViewHolder(CardBinding.getRoot());
     }
 
     @Override
     public void onBindViewHolder(final PokemonViewHolder placesViewHolder, int position) {
-         ci = placesList.get(position);
-        placesViewHolder.nome.setText(ci.getName());
-        placesViewHolder.rankDef.setText(ci.getRankDef());
-        placesViewHolder.rankOff.setText(ci.getRankOff());
-        placesViewHolder.card.setOnClickListener(new View.OnClickListener() {
+        pokemon = placesList.get(position);
+        placesViewHolder.binding.setPokemon(pokemon);
+        placesViewHolder.binding.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Intent it = new Intent(mContext, PokemonDetail.class);
-                it.putExtra("pokemon", ci);
+                it.putExtra("pokemon", pokemon);
                 mContext.startActivity(it);
             }
         });
 
     }
 
+
     public class PokemonViewHolder extends RecyclerView.ViewHolder {
-
-        protected TextView nome;
-        protected TextView rankDef;
-        protected TextView rankOff;
-        protected LinearLayout container;
-        protected CardView card;
-
-
+        CardviewLayoutBinding binding;
         public PokemonViewHolder(View v) {
             super(v);
-            container = (LinearLayout) v.findViewById(R.id.item_layout_container);
-            nome = binding.textName;
-            rankOff = (TextView) v.findViewById(R.id.textRankOff);
-            rankDef = (TextView) v.findViewById(R.id.textRankDef);
-            card = (CardView) v.findViewById(R.id.card_view);
+            binding = DataBindingUtil.bind(v);
         }
     }
 }
