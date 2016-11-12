@@ -6,9 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by antrikshtiwari on 25/04/16.
- */
+
 public class RetrofitService {
 
     private final static String API_URL = "https://pokemongobestmoves.herokuapp.com";

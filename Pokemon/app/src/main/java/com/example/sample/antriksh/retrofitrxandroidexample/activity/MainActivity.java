@@ -24,6 +24,10 @@ import com.example.sample.antriksh.retrofitrxandroidexample.databinding.Activity
 import com.example.sample.antriksh.retrofitrxandroidexample.retrofit.ProjectAPI;
 import com.example.sample.antriksh.retrofitrxandroidexample.retrofit.RetrofitService;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 import rx.Observer;
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_main);
-        //recList = (RecyclerView) findViewById(R.id.cardList);
+        EventBus.getDefault().register(this);
 
       final Snackbar snackbar = Snackbar
                 .make(mBinding.coordinatorLayout,
@@ -58,6 +62,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         snackbar.show();
     }
 
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -76,10 +85,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         subscription = service.getPokemon(pokemon)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(myObserver);
+                .subscribe(
+                        pokemons -> EventBus.getDefault().postSticky(pokemons),
+                        Throwable::printStackTrace,
+                        () -> subscription.unsubscribe()
+                );
     }
 
-    Observer<List<Pokemon>> myObserver = new Observer<List<Pokemon>>() {
+    /**Observer<List<Pokemon>> myObserver = new Observer<List<Pokemon>>() {
         @Override
         public void onCompleted() {
             subscription.unsubscribe();
@@ -93,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             findViewAndSetAdapter(pokemons);
         }
     };
-
+**/
     private void findViewAndSetAdapter(List<Pokemon> pokemonApi) {
 
 
@@ -118,5 +131,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
+    }
+
+    @Subscribe(sticky = true ,threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(List<Pokemon> event) {
+        findViewAndSetAdapter(event);
     }
 }

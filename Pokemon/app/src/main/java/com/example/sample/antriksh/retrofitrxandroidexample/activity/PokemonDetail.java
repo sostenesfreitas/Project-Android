@@ -16,36 +16,24 @@ import com.example.sample.antriksh.retrofitrxandroidexample.databinding.Activity
 
 public class PokemonDetail extends AppCompatActivity {
 
-    TextView name,
-            basicAtk,
-            chargeAtk,
-            chargeDamage,
-            rankOff,
-            rankDef,
-            tank,
-            gymOff,
-            gymDef,
-            damage,
-            gynDamage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityPokemonDetailBinding mBinding;
-        mBinding = DataBindingUtil.setContentView(this,R.layout.activity_pokemon_detail);
 
+        ActivityPokemonDetailBinding mBinding = DataBindingUtil
+                .setContentView(this,R.layout.activity_pokemon_detail);
 
-        Pokemon pokemon = (Pokemon) getIntent().getSerializableExtra("pokemon");
-        Toolbar toolbar = mBinding.toolbar;
-        toolbar.setTitle(pokemon.getName());
-        setSupportActionBar(toolbar);
+        Pokemon pokemon = (Pokemon) getIntent()
+                .getSerializableExtra("pokemon");
+
+        mBinding.toolbar.setTitle(pokemon.getName());
+        setSupportActionBar(mBinding.toolbar);
         mBinding.detail.setPokemon(pokemon);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mBinding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            public void onClick(View v) {
+                Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

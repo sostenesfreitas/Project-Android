@@ -65,10 +65,7 @@ public class PokemonAdapter extends
                 mContext.startActivity(it);
             }
         });
-
     }
-
-
     public class PokemonViewHolder extends RecyclerView.ViewHolder {
         CardviewLayoutBinding binding;
         public PokemonViewHolder(View v) {
