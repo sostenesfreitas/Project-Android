@@ -9,8 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
 
-    private final static String API_URL = "https://pokemongobestmoves.herokuapp.com";
-
+   private final static String API_URL = "https://pokemongobestmoves.herokuapp.com";
     public RetrofitService(){
     }
 

@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#C0392B</color>
     <color name="colorAccent">#FF4081</color>
     <color name="bgColor">#e5e5e5</color>
+    <color name="cinza">#424949</color>
+    <color name="ver">#CB4335</color>
 </resources>
