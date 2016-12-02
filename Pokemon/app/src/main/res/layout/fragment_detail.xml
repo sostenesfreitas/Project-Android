@@ -1,4 +1,4 @@
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="pokemons"
@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:id="@+id/detail_fragment"
     android:layout_height="match_parent"
-    tools:context="com.example.sample.antriksh.retrofitrxandroidexample.activity.DetailFragment">
+    tools:context=".fragment.DetailFragment">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -22,12 +22,28 @@
             android:background="@color/cinza"
             tools:context=".activity.DetailActivity">
 
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:id="@+id/imageView"
+                android:src="@{pokemons.name}"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:src="@mipmap/plus"
+                app:fabSize="normal"
+                android:id="@+id/fbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:id="@+id/textName"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="200dp"
                 android:textColor="@color/bgColor"
                 android:layout_centerHorizontal="true" />
 
@@ -37,8 +53,7 @@
                 android:textColor="@color/bgColor"
                 android:text="@string/damage"
                 android:id="@+id/textDamage"
-                android:layout_marginTop="30dp"
-                android:layout_below="@+id/textName"
+                android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/textName"
                 android:layout_toStartOf="@+id/textName" />
 
@@ -61,9 +76,7 @@
                 android:id="@+id/textMove"
                 android:layout_alignTop="@+id/textDamage"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="31dp"
-                android:layout_marginStart="31dp" />
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,11 +84,9 @@
                 android:textColor="@color/bgColor"
                 android:text="@string/gyn"
                 android:id="@+id/textGyn"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
                 android:layout_alignTop="@+id/textDamage"
-                android:layout_toRightOf="@+id/imageView"
-                android:layout_toEndOf="@+id/imageView" />
+                android:layout_alignRight="@+id/imageView"
+                android:layout_alignEnd="@+id/imageView" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -128,12 +139,7 @@
                 android:layout_alignLeft="@+id/textGynDamage"
                 android:layout_alignStart="@+id/textGynDamage" />
 
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:id="@+id/imageView"
-                android:src="@{pokemons.name}"
-                android:layout_alignParentBottom="true" />
+
 
         </RelativeLayout>
     </FrameLayout>

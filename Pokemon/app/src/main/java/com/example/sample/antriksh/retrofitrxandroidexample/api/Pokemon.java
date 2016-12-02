@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class Pokemon implements Serializable{
 
+
     private String name;
     private String basicAtk;
     private String chargeAtk;
@@ -19,7 +20,7 @@ public class Pokemon implements Serializable{
     private String gymDef;
     private String damage;
     private String gynDamage;
-
+    private PokeId _id;
 
     public String getName() {
         return name;
@@ -104,6 +105,10 @@ public class Pokemon implements Serializable{
     public String getGynDamage() {
         return gynDamage;
     }
+
+    public PokeId get_id() {return _id;}
+
+    public void set_id(PokeId _id) {this._id = _id;}
 
     public void setGynDamage(String gynDamage) {
         this.gynDamage = gynDamage;

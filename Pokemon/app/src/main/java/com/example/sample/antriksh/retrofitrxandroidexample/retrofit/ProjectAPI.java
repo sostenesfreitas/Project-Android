@@ -9,9 +9,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
 
-/**
- * Created by antrikshtiwari on 09/04/16.
- */
 public interface ProjectAPI {
 
     @GET("/pokemon")
