@@ -11,13 +11,16 @@ import android.view.ViewGroup;
 import com.example.sample.antriksh.retrofitrxandroidexample.R;
 import com.example.sample.antriksh.retrofitrxandroidexample.api.Pokemon;
 
+import com.example.sample.antriksh.retrofitrxandroidexample.database.DbEvent;
 import com.example.sample.antriksh.retrofitrxandroidexample.database.PokeDAO;
 import com.example.sample.antriksh.retrofitrxandroidexample.databinding.FragmentDetailBinding;
+import com.google.common.eventbus.EventBus;
 
 
 public class DetailFragment extends Fragment {
-
-   FragmentDetailBinding mBinding;
+    Pokemon pokemon;
+    FragmentDetailBinding mBinding;
+    PokeDAO pd = new PokeDAO(getActivity());
 
     public static DetailFragment newInstace(Pokemon pokemon){
         Bundle bundle = new Bundle();
@@ -36,15 +39,39 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.
                 inflate(inflater,R.layout.fragment_detail, container, false);
-        mBinding.setPokemons((Pokemon) getArguments().getSerializable("pokemon"));
-        mBinding.fbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PokeDAO pd = new PokeDAO(getActivity());
-                pd.inserir((Pokemon)getArguments().getSerializable("pokemon"));
-            }
-        });
+
+         pokemon = (Pokemon) getArguments().getSerializable("pokemon");
+
+         mBinding.setPokemons(pokemon);
+
+        Pokemon tempPokemon = pd.getPoke(pokemon.getName());
+
+        if(pokemon.getName().equals(tempPokemon.getName())){
+            changeFloatButton(true);
+        }else {
+            changeFloatButton(false);
+        }
+        mBinding.fbutton.setOnClickListener(View -> saveOrRemoveFavorite());
+
         return mBinding.getRoot();
+    }
+
+    public void saveOrRemoveFavorite(){
+        Pokemon tempPokemon = pd.getPoke(pokemon.getName());
+
+        if(tempPokemon.get_id() != null){
+            pd.delPoke(pokemon.getName());
+            changeFloatButton(false);
+        }else{
+            pd.inserir(pokemon);
+            changeFloatButton(true);
+        }
+        org.greenrobot.eventbus.EventBus.getDefault().post(new DbEvent());
+    }
+
+    public void changeFloatButton(boolean favor){
+        int resource = favor ? R.drawable.ic_close_black_24dp : R.drawable.ic_check_black_24dp;
+        mBinding.fbutton.setImageResource(resource);
     }
 
 }

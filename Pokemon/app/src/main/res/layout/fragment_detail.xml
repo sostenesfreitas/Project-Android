@@ -31,7 +31,7 @@
                 android:layout_alignParentTop="true" />
 
             <android.support.design.widget.FloatingActionButton
-                android:src="@mipmap/plus"
+
                 app:fabSize="normal"
                 android:id="@+id/fbutton"
                 android:layout_width="wrap_content"

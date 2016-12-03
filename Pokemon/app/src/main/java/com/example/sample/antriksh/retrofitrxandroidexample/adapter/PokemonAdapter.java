@@ -64,13 +64,10 @@ public class PokemonAdapter extends
         public PokemonViewHolder(View v) {
             super(v);
             binding = DataBindingUtil.bind(v);
-            binding.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            binding.cardView.setOnClickListener(View -> {
                     if(mContext instanceof PokeClick){
                         ((PokeClick)mContext).Click(binding.getPokemon());
                     }
-                }
             });
         }
     }
