@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.sample.antriksh.retrofitrxandroidexample.R;
 import com.example.sample.antriksh.retrofitrxandroidexample.adapter.PokemonAdapter;
@@ -105,7 +106,10 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        callServerPokemon(query);
+        if(query != null)
+            callServerPokemon(query);
+        else
+            Toast.makeText(getContext(), "Consulta esta em branco", Toast.LENGTH_SHORT).show();
         return true;
     }
 
